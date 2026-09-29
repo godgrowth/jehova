@@ -3,43 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>À Propos — Next Genius Growth | Agence Digitale Intégrée à Abidjan</title>
-
-<meta name="description" content="Découvrez Next Genius Growth : une équipe pluridisciplinaire à Abidjan qui réunit développement, stratégie, marketing et paiement mobile pour faire grandir votre entreprise.">
-<meta name="keywords" content="agence digitale Abidjan, à propos Next Genius Growth, équipe web Côte d'Ivoire, agence marketing digital Abidjan">
-<meta name="author" content="Next Genius Growth">
+<title>Actualités — Next Genius Growth | Agence Digitale à Abidjan</title>
+<meta name="description" content="Les dernières actualités d'Afrique et du monde, rassemblées en un seul endroit par Next Genius Growth.">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://nggrowth.space/apropos.html">
+<link rel="canonical" href="https://nggrowth.space/actualites.html">
 
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Next Genius Growth">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:title" content="À Propos — Next Genius Growth">
-<meta property="og:description" content="Une agence digitale intégrée à Abidjan : développement, stratégie, marketing et paiement mobile, pensés pour le marché ouest-africain.">
-<meta property="og:image" content="https://nggrowth.space/assets/logo.png">
-<meta property="og:url" content="https://nggrowth.space/apropos.html">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="À Propos — Next Genius Growth">
-<meta name="twitter:description" content="Une agence digitale intégrée à Abidjan : développement, stratégie, marketing et paiement mobile.">
-<meta name="twitter:image" content="https://nggrowth.space/assets/logo.png">
-
 <link rel="stylesheet" href="style.css">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://nggrowth.space/index.html"},
-    {"@type":"ListItem","position":2,"name":"À propos","item":"https://nggrowth.space/apropos.html"}
-  ]
-}
-</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678999206249"
+<style>
+  /* Styles propres à la page Actualités (préfixe news-) */
+  .news-head { padding: 56px 0 24px; max-width: 720px; }
+  .news-head h1 { margin: 8px 0 12px; }
+  .news-head p { opacity: .8; }
+
+  .news-filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 32px; }
+  .news-filters button {
+    font: inherit; cursor: pointer; padding: 9px 18px; border-radius: 999px;
+    border: 1px solid rgba(128,128,128,.4); background: transparent; color: inherit;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .news-filters button:hover { border-color: currentColor; }
+  .news-filters button[aria-pressed="true"] { background: #fff; color: #111; border-color: #fff; }
+  .news-filters button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+  .news-grid {
+    display: grid; gap: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    padding-bottom: 72px;
+  }
+  .news-card {
+    display: flex; flex-direction: column; overflow: hidden; border-radius: 14px;
+    border: 1px solid rgba(128,128,128,.25); background: rgba(128,128,128,.07);
+    color: inherit; text-decoration: none; transition: transform .2s, border-color .2s;
+  }
+  .news-card:hover { transform: translateY(-3px); border-color: rgba(128,128,128,.6); }
+  .news-card:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  .news-thumb { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; background: rgba(128,128,128,.2); display: block; }
+  .news-thumb-empty { aspect-ratio: 16 / 9; display: grid; place-items: center; background: rgba(128,128,128,.15); font-size: 2rem; }
+  .news-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .news-meta { font-size: .8rem; opacity: .7; }
+  .news-body h3 { font-size: 1.05rem; line-height: 1.35; margin: 0; }
+  .news-body p { font-size: .92rem; line-height: 1.5; opacity: .8; margin: 0; }
+
+  .news-status { padding: 40px 0 72px; opacity: .85; }
+  .news-skeleton { height: 280px; border-radius: 14px; background: rgba(128,128,128,.12); animation: newsPulse 1.4s ease-in-out infinite; }
+  @keyframes newsPulse { 50% { opacity: .5; } }
+  @media (prefers-reduced-motion: reduce) {
+    .news-skeleton { animation: none; }
+    .news-card { transition: none; }
+  }
+</style>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678999206249"
      crossorigin="anonymous"></script>
 </head>
 <body>
@@ -51,8 +69,9 @@
     <a href="index.html" class="logo"><img src="assets/logo.png" alt="Next Genius Growth" class="logo-img"></a>
     <div class="nav-links">
       <a href="index.html">Accueil</a>
-      <a href="apropos.html" class="active">À propos</a>
+      <a href="apropos.html">À propos</a>
       <a href="services.html">Services</a>
+      <a href="actualites.html" class="active">Actualités</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="nav-cta">
@@ -62,136 +81,18 @@
   </nav>
 </header>
 
-<main>
+<main class="container">
 
-  <!-- HERO À PROPOS — animation unique : convergence gauche / droite -->
-  <section class="page-hero abt-hero container">
-    <div class="abt-hero-visual">
-      <div class="ring">
-        <div class="ring-inner">
-          <img src="assets/icon.png" alt="Next Genius Growth">
-        </div>
-      </div>
-    </div>
-    <div class="abt-hero-copy">
-      <span class="eyebrow">Notre agence</span>
-      <h1>L'intelligence créative au service de votre croissance</h1>
-      <p>Next Genius Growth est une agence digitale intégrée : nous réunissons développement, stratégie, marketing, community management et paiement mobile sous un même toit, pour transformer vos ambitions en résultats concrets et mesurables.</p>
-    </div>
+  <section class="news-head">
+    <span class="eyebrow">Actualités</span>
+    <h1>L'actualité d'Afrique et du monde, au même endroit</h1>
+    <p>Les derniers articles de médias de référence, mis à jour automatiquement. Un clic vous mène à l'article complet sur le site d'origine.</p>
   </section>
 
-  <!-- NOTRE HISTOIRE -->
-  <section class="abt-story container">
-    <div class="abt-story-grid">
-      <div class="reveal-left">
-        <h2>Notre histoire</h2>
-        <p>Next Genius Growth est né d'un constat simple : trop d'entreprises ambitieuses restent freinées par des prestataires cloisonnés — un développeur d'un côté, un community manager de l'autre, une agence marketing encore ailleurs — sans vision d'ensemble ni cohérence stratégique.</p>
-        <p>Nous avons fait le choix inverse : construire une équipe pluridisciplinaire capable de porter un projet digital de bout en bout, du premier audit stratégique jusqu'à l'intégration technique la plus pointue, y compris les solutions de paiement mobile qui font souvent défaut aux entreprises ouest-africaines.</p>
-        <p>Cette approche intégrée nous permet de livrer des solutions cohérentes, où le design sert la technique, où la technique sert la stratégie, et où chaque action marketing s'appuie sur des fondations solides plutôt que sur des effets d'annonce.</p>
-      </div>
-      <div class="reveal-right">
-        <h2>Notre mission</h2>
-        <p>Donner aux entreprises et entrepreneurs les moyens digitaux de leurs ambitions : des outils robustes, une visibilité réelle et des parcours de paiement fluides, pour que la technologie devienne un accélérateur de croissance plutôt qu'une contrainte.</p>
-        <p>Nous croyons qu'une bonne stratégie digitale ne se limite pas à « être présent en ligne » : elle doit générer de la valeur mesurable — plus de clients, plus de conversions, plus de fidélité — à chaque étape du parcours utilisateur.</p>
-        <p>C'est cette exigence de résultat, alliée à une véritable proximité avec nos clients, qui définit la façon dont nous travaillons au quotidien, projet après projet.</p>
-      </div>
-    </div>
-  </section>
+  <div class="news-filters" id="newsFilters" role="group" aria-label="Filtrer par source"></div>
 
-  <!-- NOS VALEURS -->
-  <section class="abt-values container">
-    <div class="abt-values-head reveal">
-      <span class="eyebrow">Ce qui nous guide</span>
-      <h2>Nos valeurs</h2>
-      <p>Quatre principes qui structurent chacune de nos décisions, du premier échange jusqu'à la livraison finale.</p>
-    </div>
-    <div class="values-grid">
-      <div class="value-card reveal-zoom" style="--d:.05s">
-        <div class="v-icon">💡</div>
-        <h4>Innovation</h4>
-        <p>Nous explorons continuellement de nouvelles approches techniques et créatives pour garder une longueur d'avance sur vos enjeux digitaux.</p>
-      </div>
-      <div class="value-card reveal-zoom" style="--d:.12s">
-        <div class="v-icon">🎯</div>
-        <h4>Excellence</h4>
-        <p>Chaque livrable est pensé avec rigueur : un code propre, un design soigné, une stratégie argumentée — jamais approximatifs.</p>
-      </div>
-      <div class="value-card reveal-zoom" style="--d:.19s">
-        <div class="v-icon">🤝</div>
-        <h4>Intégrité</h4>
-        <p>Nous privilégions la transparence : des recommandations honnêtes, des délais réalistes et une communication claire à chaque étape.</p>
-      </div>
-      <div class="value-card reveal-zoom" style="--d:.26s">
-        <div class="v-icon">🌍</div>
-        <h4>Impact local</h4>
-        <p>Nos solutions sont pensées pour les réalités du marché ouest-africain : usages mobiles, paiement local, connectivité et pouvoir d'achat.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOTRE PARCOURS -->
-  <section class="abt-timeline container">
-    <div class="abt-timeline-head reveal">
-      <span class="eyebrow">Notre approche dans le temps</span>
-      <h2>Comment nous construisons chaque relation client</h2>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item reveal-left">
-        <span class="t-year">Étape 01</span>
-        <h4>Écoute & diagnostic</h4>
-        <p>Nous prenons le temps de comprendre votre activité, votre marché et vos contraintes réelles avant toute recommandation.</p>
-      </div>
-      <div class="timeline-item reveal-left" style="--d:.1s">
-        <span class="t-year">Étape 02</span>
-        <h4>Stratégie sur mesure</h4>
-        <p>Nous construisons une feuille de route claire, priorisée et adaptée à votre budget comme à vos objectifs de croissance.</p>
-      </div>
-      <div class="timeline-item reveal-left" style="--d:.2s">
-        <span class="t-year">Étape 03</span>
-        <h4>Exécution intégrée</h4>
-        <p>Développement, design, contenu et paiement mobile avancent en parallèle, coordonnés par une même équipe projet.</p>
-      </div>
-      <div class="timeline-item reveal-left" style="--d:.3s">
-        <span class="t-year">Étape 04</span>
-        <h4>Croissance continue</h4>
-        <p>Une fois en ligne, nous mesurons, ajustons et optimisons pour transformer chaque lancement en croissance durable.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section class="abt-stats container">
-    <div class="abt-stats-grid">
-      <div class="abt-stat-card reveal-zoom" style="--d:.05s">
-        <span class="counter" data-target="5">0</span>
-        <span class="label">Pôles d'expertise intégrés</span>
-      </div>
-      <div class="abt-stat-card reveal-zoom" style="--d:.12s">
-        <span class="counter" data-target="100" data-suffix="%">0%</span>
-        <span class="label">Solutions conçues sur mesure</span>
-      </div>
-      <div class="abt-stat-card reveal-zoom" style="--d:.19s">
-        <span class="counter" data-target="24" data-suffix="h">0h</span>
-        <span class="label">Délai moyen de première réponse</span>
-      </div>
-      <div class="abt-stat-card reveal-zoom" style="--d:.26s">
-        <span class="counter" data-target="1">0</span>
-        <span class="label">Équipe projet unique, du concept au lancement</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="showcase container">
-    <div class="showcase-frame reveal-zoom">
-      <div class="showcase-copy">
-        <span class="eyebrow">Faisons connaissance</span>
-        <h2>Vous avez un projet ? Parlons-en</h2>
-        <p>Racontez-nous votre activité et vos objectifs : nous revenons vers vous avec une première piste concrète.</p>
-        <a href="contact.html" class="btn btn-grad">Nous contacter</a>
-      </div>
-    </div>
-  </section>
+  <div id="newsStatus" class="news-status" role="status" aria-live="polite" hidden></div>
+  <div id="newsGrid" class="news-grid"></div>
 
 </main>
 
@@ -230,6 +131,7 @@
           <li><a href="apropos.html">Notre équipe</a></li>
           <li><a href="apropos.html">Notre parcours</a></li>
           <li><a href="services.html">Nos services</a></li>
+          <li><a href="actualites.html">Actualités</a></li>
           <li><a href="contact.html">Mentions légales</a></li>
         </ul>
       </div>
@@ -246,6 +148,163 @@
 </footer>
 
 </div><!-- /siteContent -->
+
+<script src="script.js" defer></script>
+
+<script>
+(function () {
+  // === CONFIGURATION : ajoutez ou retirez des sources ici ===
+  var SOURCES = [
+    { name: "RFI Afrique",      url: "https://www.rfi.fr/fr/afrique/rss" },
+    { name: "France 24 Afrique", url: "https://www.france24.com/fr/afrique/rss" },
+    { name: "Le Monde Afrique", url: "https://www.lemonde.fr/afrique/rss_full.xml" },
+    { name: "BBC Afrique",      url: "https://feeds.bbci.co.uk/afrique/rss.xml" }
+  ];
+  var MAX_PER_SOURCE = 10;      // rss2json gratuit : 10 articles max par flux
+  var CACHE_MINUTES = 30;       // évite de dépasser la limite gratuite
+  var API = "https://api.rss2json.com/v1/api.json?rss_url=";
+
+  var grid = document.getElementById("newsGrid");
+  var filters = document.getElementById("newsFilters");
+  var status = document.getElementById("newsStatus");
+  var allItems = [];
+  var activeSource = "all";
+
+  function showStatus(msg) { status.textContent = msg; status.hidden = !msg; }
+
+  function stripHtml(html) {
+    var d = document.createElement("div");
+    d.innerHTML = html || "";
+    return (d.textContent || "").replace(/\s+/g, " ").trim();
+  }
+
+  function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
+
+  function formatDate(iso) {
+    var d = new Date((iso || "").replace(" ", "T") + "Z");
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+  }
+
+  function cacheGet(key) {
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      return Date.now() - obj.t < CACHE_MINUTES * 60000 ? obj.d : null;
+    } catch (e) { return null; }
+  }
+  function cacheSet(key, data) {
+    try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
+  }
+
+  function fetchSource(src) {
+    var key = "ngg-news:" + src.url;
+    var cached = cacheGet(key);
+    if (cached) return Promise.resolve(cached);
+    return fetch(API + encodeURIComponent(src.url))
+      .then(function (r) { return r.json(); })
+      .then(function (json) {
+        if (json.status !== "ok") throw new Error("flux indisponible");
+        var items = json.items.slice(0, MAX_PER_SOURCE).map(function (it) {
+          var img = it.thumbnail || (it.enclosure && it.enclosure.link) || "";
+          return {
+            source: src.name,
+            title: stripHtml(it.title),
+            text: stripHtml(it.description).slice(0, 160),
+            link: it.link,
+            image: /\.(mp3|mp4)$/i.test(img) ? "" : img,
+            date: it.pubDate
+          };
+        });
+        cacheSet(key, items);
+        return items;
+      });
+  }
+
+  function render() {
+    grid.textContent = "";
+    var list = allItems.filter(function (i) { return activeSource === "all" || i.source === activeSource; });
+    if (!list.length) { showStatus("Aucun article à afficher pour le moment."); return; }
+    showStatus("");
+    list.forEach(function (it) {
+      var href = safeUrl(it.link);
+      if (!href) return;
+      var a = document.createElement("a");
+      a.className = "news-card";
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+
+      var thumb;
+      if (safeUrl(it.image)) {
+        thumb = document.createElement("img");
+        thumb.className = "news-thumb";
+        thumb.src = it.image;
+        thumb.alt = "";
+        thumb.loading = "lazy";
+        thumb.addEventListener("error", function () {
+          var ph = document.createElement("div");
+          ph.className = "news-thumb-empty"; ph.textContent = "📰";
+          thumb.replaceWith(ph);
+        });
+      } else {
+        thumb = document.createElement("div");
+        thumb.className = "news-thumb-empty"; thumb.textContent = "📰";
+      }
+
+      var body = document.createElement("div"); body.className = "news-body";
+      var meta = document.createElement("span"); meta.className = "news-meta";
+      meta.textContent = it.source + (formatDate(it.date) ? " — " + formatDate(it.date) : "");
+      var h3 = document.createElement("h3"); h3.textContent = it.title;
+      var p = document.createElement("p"); p.textContent = it.text;
+      body.appendChild(meta); body.appendChild(h3); if (it.text) body.appendChild(p);
+
+      a.appendChild(thumb); a.appendChild(body);
+      grid.appendChild(a);
+    });
+  }
+
+  function buildFilters() {
+    var names = ["all"].concat(SOURCES.map(function (s) { return s.name; }));
+    filters.textContent = "";
+    names.forEach(function (n) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = n === "all" ? "Toutes les sources" : n;
+      b.setAttribute("aria-pressed", String(n === activeSource));
+      b.addEventListener("click", function () {
+        activeSource = n;
+        Array.prototype.forEach.call(filters.children, function (c) { c.setAttribute("aria-pressed", "false"); });
+        b.setAttribute("aria-pressed", "true");
+        render();
+      });
+      filters.appendChild(b);
+    });
+  }
+
+  function load() {
+    buildFilters();
+    for (var i = 0; i < 6; i++) {
+      var s = document.createElement("div"); s.className = "news-skeleton"; grid.appendChild(s);
+    }
+    Promise.allSettled(SOURCES.map(fetchSource)).then(function (results) {
+      results.forEach(function (r) { if (r.status === "fulfilled") allItems = allItems.concat(r.value); });
+      allItems.sort(function (a, b) { return new Date(b.date.replace(" ", "T") + "Z") - new Date(a.date.replace(" ", "T") + "Z"); });
+      if (!allItems.length) {
+        grid.textContent = "";
+        showStatus("Impossible de charger les actualités pour le moment. Réessayez dans quelques minutes.");
+        return;
+      }
+      render();
+    });
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>
 
 <script src="script.js" defer></script>
 </body>
