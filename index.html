@@ -11,7 +11,43 @@
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Next Genius Growth">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Actualités — Next Genius Growth">
+<meta property="og:description" content="Les dernières actualités d'Afrique et du monde, rassemblées en un seul endroit.">
+<meta property="og:image" content="https://nggrowth.space/assets/logo.png">
+<meta property="og:url" content="https://nggrowth.space/actualites.html">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Actualités — Next Genius Growth">
+<meta name="twitter:description" content="Les dernières actualités d'Afrique et du monde, rassemblées en un seul endroit.">
+<meta name="twitter:image" content="https://nggrowth.space/assets/logo.png">
+
 <link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://nggrowth.space/index.html"},
+    {"@type":"ListItem","position":2,"name":"Actualités","item":"https://nggrowth.space/actualites.html"}
+  ]
+}
+</script>
+  <script>
+  atOptions = {
+    'key' : 'd25f79f884ed3495f030c3d0b8042e8f',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highrevenueformat.com/d25f79f884ed3495f030c3d0b8042e8f/invoke.js"></script>
+  <script async="async" data-cfasync="false" src="https://pl31596849.profitableratecpmnetwork.com/4f821bc2049d336355c6ae9fc30a5604/invoke.js"></script>
+<div id="container-4f821bc2049d336355c6ae9fc30a5604"></div>
 
 <style>
   /* Styles propres à la page Actualités (préfixe news-) */
@@ -86,6 +122,7 @@
   <section class="news-head">
     <span class="eyebrow">Actualités</span>
     <h1>L'actualité d'Afrique et du monde, au même endroit</h1>
+    <p>Les derniers articles de médias de référence, mis à jour automatiquement. Un clic vous mène à l'article complet sur le site d'origine.</p>
   </section>
 
   <div class="news-filters" id="newsFilters" role="group" aria-label="Filtrer par source"></div>
@@ -152,17 +189,18 @@
 
 <script>
 (function () {
-  // === CONFIGURATION : ajoutez ou retirez des sources ici ===
+  // === CONFIGURATION : ajoutez ou retirez des sources ici (virgule à la fin de chaque ligne sauf la dernière) ===
   var SOURCES = [
-    { name: "RFI Afrique",      url: "https://www.rfi.fr/fr/afrique/rss" },
+    { name: "RFI Afrique",       url: "https://www.rfi.fr/fr/afrique/rss" },
     { name: "France 24 Afrique", url: "https://www.france24.com/fr/afrique/rss" },
-    { name: "Le Monde Afrique", url: "https://www.lemonde.fr/afrique/rss_full.xml" },
-    { name: "BBC Afrique",      url: "https://feeds.bbci.co.uk/afrique/rss.xml" }
-    
+    { name: "Le Monde Afrique",  url: "https://www.lemonde.fr/afrique/rss_full.xml" },
+    { name: "Fraternité Matin",  url: "https://news.google.com/rss/search?q=site:fratmat.info&hl=fr&gl=CI&ceid=CI:fr" },
+    { name: "Abidjan.net",       url: "https://news.google.com/rss/search?q=site:abidjan.net&hl=fr&gl=CI&ceid=CI:fr" },
+    { name: "Infodrome",         url: "https://news.google.com/rss/search?q=site:infodrome.com&hl=fr&gl=CI&ceid=CI:fr" }
   ];
-  var MAX_PER_SOURCE = 10;      // rss2json gratuit : 10 articles max par flux
-  var CACHE_MINUTES = 30;       // évite de dépasser la limite gratuite
-  var API = "https://api.rss2json.com/v1/api.json?rss_url=";
+  var MAX_PER_SOURCE = 10;
+  var CACHE_MINUTES = 30;
+  var TIMEOUT_MS = 12000;
 
   var grid = document.getElementById("newsGrid");
   var filters = document.getElementById("newsFilters");
@@ -177,12 +215,17 @@
     d.innerHTML = html || "";
     return (d.textContent || "").replace(/\s+/g, " ").trim();
   }
-
   function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
 
-  function formatDate(iso) {
-    var d = new Date((iso || "").replace(" ", "T") + "Z");
-    if (isNaN(d)) return "";
+  function parseDate(str) {
+    if (!str) return new Date(0);
+    if (/^\d{4}-\d\d-\d\d \d/.test(str)) return new Date(str.replace(" ", "T") + "Z");
+    var d = new Date(str);
+    return isNaN(d) ? new Date(0) : d;
+  }
+  function formatDate(str) {
+    var d = parseDate(str);
+    if (d.getTime() === 0) return "";
     return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
   }
 
@@ -191,74 +234,97 @@
       var raw = localStorage.getItem(key);
       if (!raw) return null;
       var obj = JSON.parse(raw);
-      return Date.now() - obj.t < CACHE_MINUTES * 60000 ? obj.d : null;
+      return Date.now() - obj.t < CACHE_MINUTES * 60000 && obj.d.length ? obj.d : null;
     } catch (e) { return null; }
   }
   function cacheSet(key, data) {
     try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
   }
 
+  function timedFetch(url) {
+    var ctrl = new AbortController();
+    var t = setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS);
+    return fetch(url, { signal: ctrl.signal }).finally(function () { clearTimeout(t); });
+  }
+
+  function clean(srcName, title, desc, link, image, date) {
+    title = stripHtml(title);
+    var text = stripHtml(desc);
+    if (text.indexOf(title.slice(0, 30)) === 0) text = ""; // Google Actualités répète le titre
+    return { source: srcName, title: title, text: text.slice(0, 160), link: link,
+             image: /\.(mp3|mp4)$/i.test(image || "") ? "" : (image || ""), date: date };
+  }
+
+  // Méthode 1 : rss2json
+  function viaRss2json(src) {
+    return timedFetch("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(src.url))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j.status !== "ok" || !j.items || !j.items.length) throw new Error("rss2json vide");
+        return j.items.slice(0, MAX_PER_SOURCE).map(function (it) {
+          return clean(src.name, it.title, it.description, it.link,
+                       it.thumbnail || (it.enclosure && it.enclosure.link), it.pubDate);
+        });
+      });
+  }
+
+  // Méthode 2 (secours) : proxy + lecture XML dans le navigateur
+  function viaProxy(src) {
+    return timedFetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(src.url))
+      .then(function (r) { if (!r.ok) throw new Error("proxy " + r.status); return r.text(); })
+      .then(function (xml) {
+        var doc = new DOMParser().parseFromString(xml, "text/xml");
+        var nodes = Array.prototype.slice.call(doc.querySelectorAll("item"));
+        if (!nodes.length) throw new Error("proxy vide");
+        function tag(n, name) { var e = n.getElementsByTagName(name)[0]; return e ? e.textContent : ""; }
+        return nodes.slice(0, MAX_PER_SOURCE).map(function (n) {
+          var enc = n.getElementsByTagName("enclosure")[0];
+          var med = n.getElementsByTagName("media:thumbnail")[0] || n.getElementsByTagName("media:content")[0];
+          var img = (med && med.getAttribute("url")) || (enc && /image/.test(enc.getAttribute("type") || "") ? enc.getAttribute("url") : "");
+          return clean(src.name, tag(n, "title"), tag(n, "description"), tag(n, "link"), img, tag(n, "pubDate"));
+        });
+      });
+  }
+
   function fetchSource(src) {
-    var key = "ngg-news:" + src.url;
+    var key = "ngg-news2:" + src.url;
     var cached = cacheGet(key);
     if (cached) return Promise.resolve(cached);
-    return fetch(API + encodeURIComponent(src.url))
-      .then(function (r) { return r.json(); })
-      .then(function (json) {
-        if (json.status !== "ok") throw new Error("flux indisponible");
-        var items = json.items.slice(0, MAX_PER_SOURCE).map(function (it) {
-          var img = it.thumbnail || (it.enclosure && it.enclosure.link) || "";
-          return {
-            source: src.name,
-            title: stripHtml(it.title),
-            text: stripHtml(it.description).slice(0, 160),
-            link: it.link,
-            image: /\.(mp3|mp4)$/i.test(img) ? "" : img,
-            date: it.pubDate
-          };
-        });
-        cacheSet(key, items);
-        return items;
-      });
+    return viaRss2json(src).catch(function () { return viaProxy(src); })
+      .then(function (items) { cacheSet(key, items); return items; });
+  }
+
+  function placeholder() {
+    var ph = document.createElement("div");
+    ph.className = "news-thumb-empty"; ph.textContent = "📰";
+    return ph;
   }
 
   function render() {
     grid.textContent = "";
     var list = allItems.filter(function (i) { return activeSource === "all" || i.source === activeSource; });
-    if (!list.length) { showStatus("Aucun article à afficher pour le moment."); return; }
+    if (!list.length) { showStatus("Aucun article à afficher pour cette source pour le moment."); return; }
     showStatus("");
     list.forEach(function (it) {
       var href = safeUrl(it.link);
       if (!href) return;
       var a = document.createElement("a");
       a.className = "news-card";
-      a.href = href;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
+      a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer";
 
       var thumb;
       if (safeUrl(it.image)) {
         thumb = document.createElement("img");
-        thumb.className = "news-thumb";
-        thumb.src = it.image;
-        thumb.alt = "";
-        thumb.loading = "lazy";
-        thumb.addEventListener("error", function () {
-          var ph = document.createElement("div");
-          ph.className = "news-thumb-empty"; ph.textContent = "📰";
-          thumb.replaceWith(ph);
-        });
-      } else {
-        thumb = document.createElement("div");
-        thumb.className = "news-thumb-empty"; thumb.textContent = "📰";
-      }
+        thumb.className = "news-thumb"; thumb.src = it.image; thumb.alt = ""; thumb.loading = "lazy";
+        thumb.addEventListener("error", function () { thumb.replaceWith(placeholder()); });
+      } else { thumb = placeholder(); }
 
       var body = document.createElement("div"); body.className = "news-body";
       var meta = document.createElement("span"); meta.className = "news-meta";
       meta.textContent = it.source + (formatDate(it.date) ? " — " + formatDate(it.date) : "");
       var h3 = document.createElement("h3"); h3.textContent = it.title;
-      var p = document.createElement("p"); p.textContent = it.text;
-      body.appendChild(meta); body.appendChild(h3); if (it.text) body.appendChild(p);
+      body.appendChild(meta); body.appendChild(h3);
+      if (it.text) { var p = document.createElement("p"); p.textContent = it.text; body.appendChild(p); }
 
       a.appendChild(thumb); a.appendChild(body);
       grid.appendChild(a);
@@ -288,34 +354,29 @@
     for (var i = 0; i < 6; i++) {
       var s = document.createElement("div"); s.className = "news-skeleton"; grid.appendChild(s);
     }
-    Promise.allSettled(SOURCES.map(fetchSource)).then(function (results) {
-      results.forEach(function (r) { if (r.status === "fulfilled") allItems = allItems.concat(r.value); });
-      allItems.sort(function (a, b) { return new Date(b.date.replace(" ", "T") + "Z") - new Date(a.date.replace(" ", "T") + "Z"); });
+    var failed = [];
+    Promise.all(SOURCES.map(function (src) {
+      return fetchSource(src).then(function (items) { allItems = allItems.concat(items); })
+        .catch(function (e) { failed.push(src.name); if (window.console) console.warn("Source en échec :", src.name, e); });
+    })).then(function () {
+      allItems.sort(function (a, b) { return parseDate(b.date) - parseDate(a.date); });
       if (!allItems.length) {
         grid.textContent = "";
         showStatus("Impossible de charger les actualités pour le moment. Réessayez dans quelques minutes.");
         return;
       }
       render();
+      if (failed.length) {
+        var note = document.createElement("p");
+        note.className = "news-status";
+        note.textContent = "Sources momentanément indisponibles : " + failed.join(", ") + ".";
+        grid.insertAdjacentElement("afterend", note);
+      }
     });
   }
 
   load();
 })();
 </script>
-</body>
-</html>
-<script type="text/javascript"> var infolinks_pid = 3448295; var infolinks_wsid = 0; </script> <script type="text/javascript" src="//resources.infolinks.com/js/infolinks_main.js"></script>
-<script src="script.js" defer></script>
-<script>
-  atOptions = {
-    'key' : '270753d18f9b62781402f533825da0ee',
-    'format' : 'iframe',
-    'height' : 300,
-    'width' : 160,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/270753d18f9b62781402f533825da0ee/invoke.js"></script>
 </body>
 </html>
