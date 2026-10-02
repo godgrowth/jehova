@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concours Fonction Publique — Next Genius Growth | Agence Digitale à Abidjan</title>
+<meta name="description" content="Tous les concours et recrutements de la Fonction Publique ivoirienne rassemblés en un seul endroit : dates limites, niveaux, liens officiels.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://nggrowth.space/concours.html">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Next Genius Growth">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Concours Fonction Publique — Next Genius Growth">
+<meta property="og:description" content="Concours et recrutements de la Fonction Publique : dates limites et liens officiels.">
+<meta property="og:image" content="https://nggrowth.space/assets/logo.png">
+<meta property="og:url" content="https://nggrowth.space/concours.html">
+<link rel="stylesheet" href="style.css">
+<style>
+  .cc-head { padding: 56px 0 24px; max-width: 720px; }
+  .cc-head h1 { margin: 8px 0 12px; }
+  .cc-head p { opacity: .8; }
+  .cc-tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 8px; }
+  .cc-tools input, .cc-tools select {
+    font: inherit; padding: 10px 14px; border-radius: 10px; color: inherit;
+    border: 1px solid rgba(128,128,128,.4); background: transparent;
+  }
+  .cc-tools input { flex: 1 1 240px; }
+  .cc-tools option { color: #111; }
+  .cc-title { margin: 36px 0 14px; font-size: 1.25rem; }
+  .cc-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  .cc-card {
+    display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 14px;
+    border: 1px solid rgba(128,128,128,.25); background: rgba(128,128,128,.07);
+    color: inherit; text-decoration: none;
+  }
+  a.cc-card { transition: transform .2s, border-color .2s; }
+  a.cc-card:hover { transform: translateY(-3px); border-color: rgba(128,128,128,.6); }
+  .cc-card:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  .cc-card h3 { font-size: 1.05rem; line-height: 1.35; margin: 0; }
+  .cc-meta { font-size: .82rem; opacity: .7; }
+  .cc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cc-tag { font-size: .75rem; padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(128,128,128,.4); }
+  .cc-st { font-weight: 700; font-size: .85rem; }
+  .cc-st.ok { color: #1a9d55; } .cc-st.soon { color: #e07b00; } .cc-st.off { opacity: .55; }
+  .cc-card .btn { margin-top: auto; align-self: flex-start; }
+  .cc-status { padding: 24px 0; opacity: .85; }
+  .cc-note { font-size: .82rem; opacity: .65; margin: 40px 0 72px; }
+  .cc-skeleton { height: 160px; border-radius: 14px; background: rgba(128,128,128,.12); animation: ccPulse 1.4s ease-in-out infinite; }
+  @keyframes ccPulse { 50% { opacity: .5; } }
+  @media (prefers-reduced-motion: reduce) { .cc-skeleton { animation: none; } a.cc-card { transition: none; } }
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678999206249" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="siteContent" class="site-content">
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><img src="assets/logo.png" alt="Next Genius Growth" class="logo-img"></a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="apropos.html">À propos</a>
+      <a href="services.html">Services</a>
+      <a href="actualites.html">Actualités</a>
+      <a href="concours.html" class="active">Concours</a>
+      <a href="bons-plans.html">Bons plans</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-grad btn-small">Commencer</a>
+      <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="cc-head">
+    <span class="eyebrow">Concours</span>
+    <h1>Les concours de la Fonction Publique, au même endroit</h1>
+    <p>Concours en cours avec leurs dates limites, et dernières annonces de recrutement collectées automatiquement. Vérifiez toujours l'avis sur le site officiel avant de candidater.</p>
+  </section>
+
+  <div class="cc-tools">
+    <input id="ccQ" type="search" placeholder="Rechercher (infirmier, police, douanes…)" aria-label="Rechercher">
+    <select id="ccCat" aria-label="Domaine"><option value="">Tous les domaines</option></select>
+    <select id="ccSta" aria-label="Statut">
+      <option value="">Tous les statuts</option>
+      <option value="open">Ouverts</option>
+      <option value="soon">Bientôt clos (7 j)</option>
+      <option value="off">Clos</option>
+    </select>
+  </div>
+
+  <h2 class="cc-title">Concours en cours</h2>
+  <div id="ccList" class="cc-grid"></div>
+  <div id="ccEmpty" class="cc-status" hidden>Aucun concours ne correspond à votre recherche.</div>
+
+  <h2 class="cc-title">Dernières annonces de recrutement</h2>
+  <div id="ccFeed" class="cc-grid"></div>
+  <div id="ccFeedStatus" class="cc-status" role="status" aria-live="polite" hidden></div>
+
+  <p class="cc-note">Next Genius Growth n'est pas affilié à la Fonction Publique. Les informations sont fournies à titre indicatif ; seul l'avis officiel fait foi.</p>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="assets/logo.png" alt="Next Genius Growth" class="logo-img"></a>
+        <p>Transformer les idées en excellence digitale. Nous élevons votre solution digitale grâce à un design innovant et une stratégie sur mesure.</p>
+        <div class="socials"><a href="#">f</a><a href="#">in</a><a href="#">ig</a><a href="#">yt</a></div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">Développement web & mobile</a></li>
+          <li><a href="services.html">Community builder</a></li>
+          <li><a href="services.html">Stratégie digitale</a></li>
+          <li><a href="services.html">Agrégateurs de paiement mobile</a></li>
+          <li><a href="services.html">Marketing digital</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+2250105506377">+225 01 05 50 63 77</a></li>
+          <li><a href="mailto:goldgeniusgeneration@gmail.com">goldgeniusgeneration@gmail.com</a></li>
+          <li><a href="contact.html">Nous écrire</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Entreprise</h5>
+        <ul>
+          <li><a href="apropos.html">À propos</a></li>
+          <li><a href="apropos.html">Notre équipe</a></li>
+          <li><a href="apropos.html">Notre parcours</a></li>
+          <li><a href="services.html">Nos services</a></li>
+          <li><a href="actualites.html">Actualités</a></li>
+          <li><a href="concours.html">Concours</a></li>
+          <li><a href="bons-plans.html">Bons plans</a></li>
+          <li><a href="contact.html">Mentions légales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Next Genius Growth. Tous droits réservés.</span>
+      <div class="links">
+        <a href="#">Conditions d'utilisation</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Politique de cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /siteContent -->
+
+<script src="script.js" defer></script>
+
+<script>
+(function () {
+  // === 1) CONCOURS OFFICIELS : à compléter à la main (exemples fictifs à remplacer) ===
+  // Format des dates : AAAA-MM-JJ
+  var CONCOURS = [
+    { titre: "Recrutement d'infirmiers diplômés d'État", org: "Ministère de la Santé", cat: "Santé", niv: "Bac+3", postes: 400, debut: "2026-09-15", fin: "2026-10-20", url: "https://www.fonctionpublique.gouv.ci" },
+    { titre: "Concours direct d'instituteurs adjoints", org: "Ministère de l'Éducation nationale", cat: "Éducation", niv: "BAC", postes: 1500, debut: "2026-09-01", fin: "2026-10-08", url: "https://www.fonctionpublique.gouv.ci" },
+    { titre: "Recrutement d'attachés d'administration", org: "Fonction Publique", cat: "Administration", niv: "Master", postes: 120, debut: "2026-10-01", fin: "2026-11-15", url: "https://www.fonctionpublique.gouv.ci" },
+    { titre: "Concours des Douanes – contrôleurs", org: "Direction Générale des Douanes", cat: "Finances", niv: "Licence", postes: 150, debut: "2026-09-20", fin: "2026-10-12", url: "https://www.fonctionpublique.gouv.ci" },
+    { titre: "Recrutement d'ingénieurs des travaux publics", org: "Ministère de l'Équipement", cat: "Technique", niv: "Bac+5", postes: 60, debut: "2026-10-05", fin: "2026-12-01", url: "https://www.fonctionpublique.gouv.ci" }
+  ];
+  // === 2) FLUX AUTOMATIQUES (comme la page Actualités) ===
+  var SOURCES = [
+    { name: "Concours fonction publique", url: "https://news.google.com/rss/search?q=concours+fonction+publique+C%C3%B4te+d%27Ivoire&hl=fr&gl=CI&ceid=CI:fr" },
+    { name: "Recrutement État", url: "https://news.google.com/rss/search?q=recrutement+fonction+publique+C%C3%B4te+d%27Ivoire&hl=fr&gl=CI&ceid=CI:fr" },
+    { name: "Fonction Publique CI", url: "https://news.google.com/rss/search?q=site:fonctionpublique.gouv.ci&hl=fr&gl=CI&ceid=CI:fr" }
+  ];
+  var MAX_PER_SOURCE = 10, CACHE_MINUTES = 30, TIMEOUT_MS = 12000;
+
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
+  function stripHtml(h) { var d = document.createElement("div"); d.innerHTML = h || ""; return (d.textContent || "").replace(/\s+/g, " ").trim(); }
+  function days(d) { var t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((new Date(d + "T00:00:00") - t) / 864e5); }
+  function fmt(d) { return new Date(d + "T00:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }); }
+  function parseDate(s) { var d = new Date(s); return s && !isNaN(d) ? d : new Date(0); }
+  function status(c) { var d = days(c.fin); return d < 0 ? "off" : d <= 7 ? "soon" : "open"; }
+
+  /* ---------- Concours officiels ---------- */
+  var cat = $("ccCat");
+  CONCOURS.map(function (c) { return c.cat; }).filter(function (v, i, a) { return a.indexOf(v) === i; })
+    .sort().forEach(function (v) { cat.add(new Option(v, v)); });
+
+  function renderConcours() {
+    var q = $("ccQ").value.toLowerCase(), c = cat.value, s = $("ccSta").value;
+    var list = CONCOURS.filter(function (x) {
+      var st = status(x);
+      return (!q || (x.titre + " " + x.org).toLowerCase().indexOf(q) > -1) && (!c || x.cat === c) &&
+             (!s || (s === "open" ? st === "open" || st === "soon" : st === s));
+    }).sort(function (a, b) {
+      var oa = days(a.fin) < 0, ob = days(b.fin) < 0;
+      return (oa - ob) || (a.fin > b.fin ? 1 : -1);
+    });
+    var box = $("ccList"); box.textContent = "";
+    $("ccEmpty").hidden = list.length > 0;
+    list.forEach(function (x) {
+      var st = status(x), d = days(x.fin);
+      var lab = st === "off" ? "Clos" : days(x.debut) > 0 ? "Ouvre le " + fmt(x.debut) :
+                d === 0 ? "Dernier jour !" : d + " jour" + (d > 1 ? "s" : "") + " restant" + (d > 1 ? "s" : "");
+      var card = el("article", "cc-card");
+      card.appendChild(el("span", "cc-st " + (st === "off" ? "off" : st === "soon" ? "soon" : "ok"), "● " + lab));
+      card.appendChild(el("h3", "", x.titre));
+      card.appendChild(el("span", "cc-meta", x.org));
+      var tags = el("div", "cc-tags");
+      [x.cat, x.niv, x.postes ? x.postes + " postes" : ""].forEach(function (t) { if (t) tags.appendChild(el("span", "cc-tag", t)); });
+      card.appendChild(tags);
+      card.appendChild(el("span", "cc-meta", "Du " + fmt(x.debut) + " au " + fmt(x.fin)));
+      if (safeUrl(x.url)) {
+        var a = el("a", "btn btn-grad btn-small", "Voir l'avis officiel");
+        a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer"; card.appendChild(a);
+      }
+      box.appendChild(card);
+    });
+  }
+  ["ccQ", "ccCat", "ccSta"].forEach(function (id) { $(id).addEventListener("input", renderConcours); });
+  renderConcours();
+
+  /* ---------- Flux d'annonces ---------- */
+  function cacheGet(k) {
+    try { var o = JSON.parse(localStorage.getItem(k) || "null"); return o && Date.now() - o.t < CACHE_MINUTES * 60000 && o.d.length ? o.d : null; } catch (e) { return null; }
+  }
+  function cacheSet(k, d) { try { localStorage.setItem(k, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {} }
+  function timedFetch(url) {
+    var c = new AbortController(), t = setTimeout(function () { c.abort(); }, TIMEOUT_MS);
+    return fetch(url, { signal: c.signal }).finally(function () { clearTimeout(t); });
+  }
+  function viaRss2json(src) {
+    return timedFetch("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(src.url))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j.status !== "ok" || !j.items || !j.items.length) throw new Error("vide");
+        return j.items.slice(0, MAX_PER_SOURCE).map(function (it) {
+          return { source: src.name, title: stripHtml(it.title), link: it.link, date: it.pubDate };
+        });
+      });
+  }
+  function viaProxy(src) {
+    return timedFetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(src.url))
+      .then(function (r) { if (!r.ok) throw new Error("proxy"); return r.text(); })
+      .then(function (xml) {
+        var nodes = [].slice.call(new DOMParser().parseFromString(xml, "text/xml").querySelectorAll("item"));
+        if (!nodes.length) throw new Error("vide");
+        function tag(n, k) { var e = n.getElementsByTagName(k)[0]; return e ? e.textContent : ""; }
+        return nodes.slice(0, MAX_PER_SOURCE).map(function (n) {
+          return { source: src.name, title: stripHtml(tag(n, "title")), link: tag(n, "link"), date: tag(n, "pubDate") };
+        });
+      });
+  }
+  function fetchSource(src) {
+    var key = "ngg-cc:" + src.url, c = cacheGet(key);
+    if (c) return Promise.resolve(c);
+    return viaRss2json(src).catch(function () { return viaProxy(src); })
+      .then(function (items) { cacheSet(key, items); return items; });
+  }
+
+  var feed = $("ccFeed"), fs = $("ccFeedStatus");
+  for (var i = 0; i < 3; i++) feed.appendChild(el("div", "cc-skeleton"));
+  var all = [];
+  Promise.all(SOURCES.map(function (s) {
+    return fetchSource(s).then(function (it) { all = all.concat(it); }).catch(function () {});
+  })).then(function () {
+    feed.textContent = "";
+    var seen = {};
+    all = all.filter(function (x) { var k = x.title.toLowerCase(); if (seen[k] || !safeUrl(x.link)) return false; seen[k] = 1; return true; })
+             .sort(function (a, b) { return parseDate(b.date) - parseDate(a.date); }).slice(0, 18);
+    if (!all.length) { fs.textContent = "Impossible de charger les annonces pour le moment. Réessayez dans quelques minutes."; fs.hidden = false; return; }
+    all.forEach(function (x) {
+      var a = el("a", "cc-card");
+      a.href = x.link; a.target = "_blank"; a.rel = "noopener noreferrer";
+      var d = parseDate(x.date);
+      a.appendChild(el("span", "cc-meta", x.source + (d.getTime() ? " — " + d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "")));
+      a.appendChild(el("h3", "", x.title));
+      feed.appendChild(a);
+    });
+  });
+})();
+</script>
+</body>
+</html>
