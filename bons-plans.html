@@ -239,13 +239,13 @@
   // "calc" (facultatif) calcule une colonne dérivée.
   var COMPARE = {
     "Forfaits internet mobile": {
-      cols: [["nom", "Offre"], ["go", "Go", 1], ["validite", "Validité"], ["prix", "Prix (FCFA)", 1], ["pgo", "Prix / Go", 1]],
+      cols: [["Pass Mois", "7,5"], ["7,5go", "7,5Go", 1], ["30 J", "30 J"], ["5000", "5000 (FCFA)", 1], ["pgo", "Prix / Go", 1]],
       best: "pgo",
       calc: function (r) { r.pgo = Math.round(r.prix / r.go); },
       rows: [
-        { nom: "Opérateur A – Pass 5 Go", go: 5, validite: "30 j", prix: 5000, url: "" },
-        { nom: "Opérateur B – Pass 10 Go", go: 10, validite: "30 j", prix: 8000, url: "" },
-        { nom: "Opérateur C – Pass 3 Go", go: 3, validite: "7 j", prix: 2000, url: "" }
+        { nom: "Orange CI – Pass 900 Mo", Mo: 1, validite: "01 j", prix: 300, url: "https://www.orange.ci/fr/les-pass-internet-new.html" },
+        { nom: "Moov Africa CI – Pass 4 Go", go: 4, validite: "05 j", prix: 2000, url: "https://www.moov-africa.ci/espace-particulier/forfait-internet-moov-folie/" },
+        { nom: "MTNTCI – Pass 3 Go", go: 3, validite: "7 j", prix: 500, url: "https://www.mtn.ci/deal/packs-internet/" }
       ]
     },
     "Transfert Mobile Money": {
@@ -253,9 +253,9 @@
       best: "pct",
       calc: function (r) { r.pct = Math.round(r.frais / r.montant * 1000) / 10; },
       rows: [
-        { nom: "Service A", montant: 50000, frais: 500, url: "" },
-        { nom: "Service B", montant: 50000, frais: 750, url: "" },
-        { nom: "Service C", montant: 50000, frais: 400, url: "" }
+        { nom: "Orange Money", montant: 5000, frais: 00, url: "https://www.orange.ci/fr/n-orange-money.html" },
+        { nom: "Moov Folies", montant: 5000, frais: 00, url: "https://www.moov-africa.ci/moov-money/" },
+        { nom: "MoMo", montant: 50000, frais: OO, url: "https://www.mtn.ci/momo/" }
       ]
     }
   };
