@@ -84,6 +84,7 @@
     <p>Concours en cours avec leurs dates limites, et dernières annonces de recrutement collectées automatiquement. Vérifiez toujours l'avis sur le site officiel avant de candidater.</p>
   </section>
 
+  <div id="ccManual">
   <div class="cc-tools">
     <input id="ccQ" type="search" placeholder="Rechercher (infirmier, police, douanes…)" aria-label="Rechercher">
     <select id="ccCat" aria-label="Domaine"><option value="">Tous les domaines</option></select>
@@ -98,6 +99,7 @@
   <h2 class="cc-title">Concours en cours</h2>
   <div id="ccList" class="cc-grid"></div>
   <div id="ccEmpty" class="cc-status" hidden>Aucun concours ne correspond à votre recherche.</div>
+  </div>
 
   <h2 class="cc-title">Dernières annonces de recrutement</h2>
   <div id="ccFeed" class="cc-grid"></div>
@@ -166,13 +168,7 @@
 (function () {
   // === 1) CONCOURS OFFICIELS : à compléter à la main (exemples fictifs à remplacer) ===
   // Format des dates : AAAA-MM-JJ
-  var CONCOURS = [
-    { titre: "Recrutement d'infirmiers diplômés d'État", org: "Ministère de la Santé", cat: "Santé", niv: "Bac+3", postes: 400, debut: "2026-09-15", fin: "2026-10-20", url: "https://www.fonctionpublique.gouv.ci" },
-    { titre: "Concours direct d'instituteurs adjoints", org: "Ministère de l'Éducation nationale", cat: "Éducation", niv: "BAC", postes: 1500, debut: "2026-09-01", fin: "2026-10-08", url: "https://www.fonctionpublique.gouv.ci" },
-    { titre: "Recrutement d'attachés d'administration", org: "Fonction Publique", cat: "Administration", niv: "Master", postes: 120, debut: "2026-10-01", fin: "2026-11-15", url: "https://www.fonctionpublique.gouv.ci" },
-    { titre: "Concours des Douanes – contrôleurs", org: "Direction Générale des Douanes", cat: "Finances", niv: "Licence", postes: 150, debut: "2026-09-20", fin: "2026-10-12", url: "https://www.fonctionpublique.gouv.ci" },
-    { titre: "Recrutement d'ingénieurs des travaux publics", org: "Ministère de l'Équipement", cat: "Technique", niv: "Bac+5", postes: 60, debut: "2026-10-05", fin: "2026-12-01", url: "https://www.fonctionpublique.gouv.ci" }
-  ];
+  var CONCOURS = [];  // facultatif : concours ajoutés à la main (sinon, tout est automatique)
   // === 2) FLUX AUTOMATIQUES (comme la page Actualités) ===
   var SOURCES = [
     { name: "Concours fonction publique", url: "https://news.google.com/rss/search?q=concours+fonction+publique+C%C3%B4te+d%27Ivoire&hl=fr&gl=CI&ceid=CI:fr" },
@@ -228,6 +224,7 @@
   }
   ["ccQ", "ccCat", "ccSta"].forEach(function (id) { $(id).addEventListener("input", renderConcours); });
   renderConcours();
+  if (!CONCOURS.length) $("ccManual").hidden = true;
 
   /* ---------- Flux d'annonces ---------- */
   function cacheGet(k) {
@@ -270,13 +267,15 @@
   var feed = $("ccFeed"), fs = $("ccFeedStatus");
   for (var i = 0; i < 3; i++) feed.appendChild(el("div", "cc-skeleton"));
   var all = [];
-  Promise.all(SOURCES.map(function (s) {
-    return fetchSource(s).then(function (it) { all = all.concat(it); }).catch(function () {});
-  })).then(function () {
+  fetch("data/aggregate.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (j) { all = (j.concours || []).map(function (x) { return { source: x.source, title: x.title, link: x.link, date: x.date }; }); if (!all.length) throw 0; })
+    .catch(function () {
+      return Promise.all(SOURCES.map(function (s) { return fetchSource(s).then(function (it) { all = all.concat(it); }).catch(function () {}); }));
+    }).then(function () {
     feed.textContent = "";
     var seen = {};
     all = all.filter(function (x) { var k = x.title.toLowerCase(); if (seen[k] || !safeUrl(x.link)) return false; seen[k] = 1; return true; })
-             .sort(function (a, b) { return parseDate(b.date) - parseDate(a.date); }).slice(0, 18);
+             .sort(function (a, b) { return parseDate(b.date) - parseDate(a.date); }).slice(0, 36);
     if (!all.length) { fs.textContent = "Impossible de charger les annonces pour le moment. Réessayez dans quelques minutes."; fs.hidden = false; return; }
     all.forEach(function (x) {
       var a = el("a", "cc-card");
