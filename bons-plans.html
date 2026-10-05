@@ -65,16 +65,6 @@
   @media (prefers-reduced-motion: reduce) { .bp-tabs button, .bp-chips button { transition: none; } }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958678999206249" crossorigin="anonymous"></script>
-  <script>
-  atOptions = {
-    'key' : '96160f25bac1be110605cb96dc7e7c08',
-    'format' : 'iframe',
-    'height' : 600,
-    'width' : 160,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/96160f25bac1be110605cb96dc7e7c08/invoke.js"></script>
   <!-- Addexion : digital agence -->
 <script async src="https://addexion.com/js/ad.js" data-site="hdihX3U3oVDB9o0yTDQmmtkg5EAOljar"></script>
 </head>
@@ -241,23 +231,23 @@
   // "calc" (facultatif) calcule une colonne dérivée.
   var COMPARE = {
     "Forfaits internet mobile": {
-      cols: [["Pass Mois", "7,5"], ["7,5go", "7,5Go", 1], ["30 J", "30 J"], ["5000", "5000 (FCFA)", 1], ["pgo", "Prix / Go", 1]],
+      cols: [["nom", "Offre"], ["go", "Go", 1], ["validite", "Validité"], ["prix", "Prix (FCFA)", 1], ["pgo", "Prix / Go", 1]],
       best: "pgo",
       calc: function (r) { r.pgo = Math.round(r.prix / r.go); },
       rows: [
-        { nom: "Orange CI – Pass 900 Mo", Mo: 1, validite: "01 j", prix: 300, url: "https://www.orange.ci/fr/les-pass-internet-new.html" },
-        { nom: "Moov Africa CI – Pass 4 Go", go: 4, validite: "05 j", prix: 2000, url: "https://www.moov-africa.ci/espace-particulier/forfait-internet-moov-folie/" },
-        { nom: "MTN CI – Pass 3 Go", go: 3, validite: "7 j", prix: 500, url: "https://www.mtn.ci/deal/packs-internet/" }
+        { nom: "Opérateur A – Pass 5 Go", go: 5, validite: "30 j", prix: 5000, url: "" },
+        { nom: "Opérateur B – Pass 10 Go", go: 10, validite: "30 j", prix: 8000, url: "" },
+        { nom: "Opérateur C – Pass 3 Go", go: 3, validite: "7 j", prix: 2000, url: "" }
       ]
     },
     "Transfert Mobile Money": {
-      cols: [["Momo", "Mobil Money"], ["10000", "Montant (FCFA)", 1], ["frais", "Frais (FCFA)", 1], ["pct", "Frais en %", 1]],
+      cols: [["nom", "Service"], ["montant", "Montant (FCFA)", 1], ["frais", "Frais (FCFA)", 1], ["pct", "Frais en %", 1]],
       best: "pct",
       calc: function (r) { r.pct = Math.round(r.frais / r.montant * 1000) / 10; },
       rows: [
-        { nom: "Orange Money", montant: 5000, frais: 00, url: "https://www.orange.ci/fr/n-orange-money.html" },
-        { nom: "Moov Folies", montant: 5000, frais: 00, url: "https://www.moov-africa.ci/moov-money/" },
-        { nom: "MoMo", montant: 50000, frais: OO, url: "https://www.mtn.ci/momo/" }
+        { nom: "Service A", montant: 50000, frais: 500, url: "" },
+        { nom: "Service B", montant: 50000, frais: 750, url: "" },
+        { nom: "Service C", montant: 50000, frais: 400, url: "" }
       ]
     }
   };
