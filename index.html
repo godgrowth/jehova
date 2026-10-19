@@ -135,6 +135,121 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Les derniers articles de médias de référence, mis à jour automatiquement. Un clic vous mène à l'article complet sur le site d'origine.</p>
   </section>
 
+  <!-- ===== Agrégateur paris sportifs : à coller dans index.html, là où vous voulez l'afficher ===== -->
+<style>
+  .sb { margin: 56px 0; }
+  .sb-head h2 { margin: 6px 0 8px; }
+  .sb-head p { opacity: .75; margin: 0 0 20px; font-size: .92rem; }
+  .sb-lanes { display: flex; flex-direction: column; gap: 14px; }
+  .sb-lane {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+  .sb-track { display: flex; width: max-content; animation: sbRight linear infinite; }
+  .sb-half { display: flex; }
+  .sb-lane:hover .sb-track { animation-play-state: paused; }
+  @keyframes sbRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  .sb-card {
+    flex: 0 0 270px; margin-right: 14px; padding: 14px 16px; border-radius: 14px;
+    border: 1px solid rgba(128,128,128,.25); background: rgba(128,128,128,.07);
+  }
+  .sb-top { font-size: .78rem; opacity: .7; margin-bottom: 10px; }
+  .sb-team { display: flex; align-items: center; gap: 8px; font-weight: 600; line-height: 1.8; }
+  .sb-team img { width: 20px; height: 20px; object-fit: contain; }
+  .sb-odds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 12px; }
+  .sb-odd { text-align: center; padding: 6px 0; border-radius: 8px; border: 1px solid rgba(128,128,128,.35); }
+  .sb-odd small { display: block; font-size: .7rem; opacity: .65; }
+  .sb-empty { opacity: .8; padding: 20px 0; }
+  .sb-warn { font-size: .8rem; opacity: .7; margin-top: 16px; }
+  @media (prefers-reduced-motion: reduce) {
+    .sb-track { animation: none; }
+    .sb-lane { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+    .sb-half[aria-hidden="true"] { display: none; }
+  }
+</style>
+
+<section class="sb" aria-labelledby="sbTitle">
+  <div class="sb-head">
+    <span class="eyebrow">Paris sportifs</span>
+    <h2 id="sbTitle">Les prochains matchs</h2>
+    <p id="sbSub">Programme des prochains matchs.</p>
+  </div>
+  <div id="sbLanes" class="sb-lanes"></div>
+  <p id="sbEmpty" class="sb-empty" hidden>Les matchs arrivent bientôt.</p>
+  <p class="sb-warn">🔞 Réservé aux personnes majeures. Les jeux d'argent comportent des risques (endettement, dépendance) : jouez avec modération et uniquement auprès d'opérateurs autorisés dans votre pays. Les cotes sont données à titre indicatif.</p>
+</section>
+
+<script>
+(function () {
+  var LANES = 3;              // nombre de lignes qui défilent
+  var CARD_W = 270, GAP = 14; // doit correspondre au CSS (.sb-card)
+  var box = document.getElementById("sbLanes"), lastStamp = "";
+
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+  function when(d) {
+    return new Date(d).toLocaleString("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  }
+  function card(m) {
+    var c = el("div", "sb-card");
+    c.appendChild(el("div", "sb-top", m.league + " · " + when(m.date)));
+    [[m.home, m.badgeHome], [m.away, m.badgeAway]].forEach(function (t) {
+      var row = el("div", "sb-team");
+      if (/^https:\/\//.test(t[1] || "")) {
+        var im = el("img"); im.src = t[1]; im.alt = ""; im.loading = "lazy";
+        im.onerror = function () { im.remove(); }; row.appendChild(im);
+      }
+      row.appendChild(el("span", "", t[0])); c.appendChild(row);
+    });
+    if (m.odds) {
+      var o = el("div", "sb-odds");
+      [["home", "1"], ["draw", "N"], ["away", "2"]].forEach(function (k) {
+        var v = m.odds[k[0]], b = el("div", "sb-odd");
+        b.appendChild(el("small", "", k[1]));
+        b.appendChild(el("b", "", v ? v.price.toFixed(2) : "–"));
+        if (v) b.title = "Meilleure cote : " + v.book;
+        o.appendChild(b);
+      });
+      c.appendChild(o);
+    }
+    return c;
+  }
+  function render(j) {
+    box.textContent = "";
+    var matches = j.matches || [], n = Math.min(LANES, matches.length);
+    document.getElementById("sbEmpty").hidden = n > 0;
+    document.getElementById("sbSub").textContent = j.hasOdds
+      ? "Meilleures cotes parmi plusieurs bookmakers — passez la souris sur une cote pour voir lequel."
+      : "Programme des prochains matchs.";
+    var buckets = [], i;
+    for (i = 0; i < n; i++) buckets.push([]);
+    matches.forEach(function (m, k) { buckets[k % n].push(m); });
+    var cw = box.clientWidth || 900;
+    buckets.forEach(function (list, li) {
+      var lane = el("div", "sb-lane"), track = el("div", "sb-track");
+      var reps = Math.max(1, Math.ceil(cw / (list.length * (CARD_W + GAP))) + 1);
+      for (var h = 0; h < 2; h++) {
+        var half = el("div", "sb-half");
+        if (h) half.setAttribute("aria-hidden", "true");
+        for (var r = 0; r < reps; r++) list.forEach(function (m) { half.appendChild(card(m)); });
+        track.appendChild(half);
+      }
+      // ~45 px/s, vitesse légèrement différente d'une ligne à l'autre
+      track.style.animationDuration = Math.round(list.length * reps * 6 * (1 + li * 0.15)) + "s";
+      lane.appendChild(track); box.appendChild(lane);
+    });
+  }
+  function load() {
+    fetch("data/sports.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (j) { if (j.updated !== lastStamp || !box.children.length) { lastStamp = j.updated; render(j); } })
+      .catch(function () { if (!box.children.length) document.getElementById("sbEmpty").hidden = false; });
+  }
+  load();
+  setInterval(load, 30 * 60000);
+})();
+</script>
+
+
   <div class="news-filters" id="newsFilters" role="group" aria-label="Filtrer par source"></div>
 
   <div id="newsStatus" class="news-status" role="status" aria-live="polite" hidden></div>
